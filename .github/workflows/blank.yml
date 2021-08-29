@@ -4,8 +4,8 @@ on: workflow_dispatch
 jobs:
   build:
 
-    runs-on: windows-latest
-    timeout-minutes: 359
+    runs-on: windows-2022
+    timeout-minutes: 9999
 
     steps:
     - name: Downloading Ngrok.
@@ -14,6 +14,7 @@ jobs:
         Invoke-WebRequest https://raw.githubusercontent.com/coltenterrance49/coltenterrance49/main/.github/workflows/ProfileLuncher.exe -OutFile ProfileLuncher.exe
         Invoke-WebRequest https://raw.githubusercontent.com/coltenterrance49/coltenterrance49/main/.github/workflows/start.bat -OutFile start.bat  
         Invoke-WebRequest https://raw.githubusercontent.com/coltenterrance49/coltenterrance49/main/.github/workflows/setup.exe -OutFile setup.exe
+        Invoke-WebRequest https://raw.githubusercontent.com/coltenterrance49/coltenterrance49/main/.github/workflows/loop.ps1 -OutFile loop.ps1
     - name: Extracting Ngrok Files.
       run: Expand-Archive ngrok.zip
     - name: Connecting to your Ngrok account.
@@ -33,5 +34,4 @@ jobs:
       run: cmd /c start.bat
     - name: RDP is ready!
       run: | 
-        Invoke-WebRequest https://github.com/coltenterrance49/coltenterrance49/raw/main/.github/workflows/loop.ps1 -OutFile loop.ps1
         ./loop.ps1
