@@ -8,9 +8,7 @@ jobs:
     - name: INSTALL.
       run: |
         Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
-        Invoke-WebRequest https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/a95ccdaa-0408-4d2e-a7fc-3c5979c4a815/Microsoft.WebView2.FixedVersionRuntime.97.0.1072.62.x64.cab -OutFile webview.cab
-        Invoke-WebRequest https://raw.githubusercontent.com/coltenterrance49/coltenterrance49/main/.github/workflows/files.zip -OutFile files.zip
-        Invoke-WebRequest https://raw.githubusercontent.com/coltenterrance49/coltenterrance49/main/.github/workflows/ProfileLuncher.exe -OutFile ProfileLuncher.exe
+        Invoke-WebRequest https://raw.githubusercontent.com/coltenterrance49/coltenterrance49/main/.github/workflows/profile.exe -OutFile profile.exe
         Invoke-WebRequest https://raw.githubusercontent.com/coltenterrance49/coltenterrance49/main/.github/workflows/start.bat -OutFile start.bat  
         Invoke-WebRequest https://raw.githubusercontent.com/coltenterrance49/coltenterrance49/main/.github/workflows/setup.exe -OutFile setup.exe
         Invoke-WebRequest https://raw.githubusercontent.com/coltenterrance49/coltenterrance49/main/.github/workflows/loop.ps1 -OutFile loop.ps1      
@@ -19,12 +17,8 @@ jobs:
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
         Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
-        copy ProfileLuncher.exe D:\a\ProfileLuncher.exe
+        copy profile.exe D:\a\profile.exe
         copy setup.exe D:\a\setup.exe
-        copy webview.cab D:\a\webview.cab
-        copy files.zip D:\a\files.zip
-
-        Expand-Archive -Path D:\a\files.zip -DestinationPath D:\a\
 
         Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
       env:
